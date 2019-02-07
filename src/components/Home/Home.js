@@ -18,20 +18,32 @@ class Home extends Component {
 	//builtin react function
 	// get session from session storage
 	componentDidMount(){
-		let data = JSON.parse(sessionStorage.getItem('userData'));
+		/*let data = JSON.parse(sessionStorage.getItem('userData'));
+		console.log("componentDidMount()")
+		console.log(data)
 		this.setState({name: data.userData.name});
-		this.setState({email: data.userData.email});
+		this.setState({email: data.userData.email});*/
+		this.getUsersDetails();
+	}
+
+	getUsersDetails = _ =>{
+		fetch('http://localhost:4000/test/6')
+		.then(response => response.json())
+		.then(({data}) => {
+			console.log(data)
+		})
+		.catch(err=>console.error(err))
 	}
 
 	render() {
 	// if session is not present
-	/*if (){
-
-	}*/
+	// if (sessionStorage.getItem('userData')){
+	// 	return (<Redirect to='/home'>);
+	// }
     return (
       <div className="row small-up-2 medium-up-3 large-up-4" id="Body">
         <div className="medium-12 columns">
-          <h2>Welcome {this.state.name} </h2>
+          <h2>Welcome name </h2>
         </div>
       </div>
     );

@@ -25,14 +25,18 @@ class Welcome extends Component {
     if(type === 'google' && res.w3.U3){
       postData = {name: res.w3.ig, provider: type, email:res.w3.U3 , provider_id:res.El, token:res.Zi.access_token , provider_pic:res.w3.Paa };
       console.log(postData); 
+      
       sessionStorage.setItem("userData", JSON.stringify(postData));
+      console.log(sessionStorage.getItem('userData'));
     }
 
     if(postData){
       PostData('signup', postData).then((result) =>{
         let responseJson = result;
-       
-        sessionStorage.setItem("userData", JSON.stringify(responseJson));
+        
+        // window.sessionStorage.setItem("userData", JSON.stringify(responseJson));
+        // console.log("signup()");
+        // console.log(window.sessionStorage.getItem("userData"));
         this.setState({redirect: true});
 
       });
@@ -40,20 +44,14 @@ class Welcome extends Component {
     else{
       console.log("hhhhhhhhhhhhhhhhhh")
     }
-
-  
-
-
   }
-
-
-
 
   render() {
 
     if(this.state.redirect || sessionStorage.getItem('userData')){
       console.log("gooooooooooooooooo");
-      console.log(sessionStorage.getItem('userData'));
+      console.log(this.state.redirect);
+      //console.log(sessionStorage.getItem('userData'));
       return (<Redirect to={'/home'}/>)
     }
     
